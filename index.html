@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HealthPromotion Foundation</title>
+    <style>
+        /* CSS Styles */
+        :root {
+            --primary-color: #2a7f62;
+            --secondary-color: #3bb78f;
+            --accent-color: #f0b90b;
+            --light-color: #f8f9fa;
+            --dark-color: #343a40;
+            --text-color: #333;
+            --white: #ffffff;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--light-color);
+        }
+        
+        .top-bar {
+            background-color: var(--primary-color);
+            color: var(--white);
+            padding: 10px 0;
+            font-size: 0.9rem;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .contact-info {
+            display: flex;
+            gap: 20px;
+        }
+        
+        header {
+            background-color: var(--white);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .logo img {
+            height: 60px;
+            width: auto;
+        }
+        
+        .logo-text h1 {
+            color: var(--primary-color);
+            font-size: 1.8rem;
+            margin-bottom: 5px;
+        }
+        
+        .logo-text p {
+            color: var(--secondary-color);
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+        }
+        
+        nav a {
+            text-decoration: none;
+            color: var(--dark-color);
+            font-weight: 600;
+            font-size: 1rem;
+            transition: color 0.3s;
+            position: relative;
+        }
+        
+        nav a:hover {
+            color: var(--primary-color);
+        }
+        
+        nav a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background: var(--primary-color);
+            bottom: -5px;
+            left: 0;
+            transition: width 0.3s;
+        }
+        
+        nav a:hover::after {
+            width: 100%;
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--dark-color);
+        }
+        
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEirw_ADRd2NNwgDfR2qRgLdPk2kOI2lrfpNU4XSxoUuueTRhcvqwvsmVoqp-djjWohR43aSxroZKsKraOCuKp4DgRnUF6S7hkghwhpM5fxR52rsNa0p5RuZxJTyCt9fkTnEamQuOmgPaPfb6kb22Jh8n-Woo0ZuD095Dy2lRRaMOjOuWId4CA47CtzPAw/s320/2e13cf27-2d56-4033-97b4-8380d14d3fd0.jpg');
+            background-size: cover;
+            background-position: center;
+            color: var(--white);
+            text-align: center;
+            padding: 100px 20px;
+        }
+        
+        .hero h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 30px;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--accent-color);
+            color: var(--dark-color);
+            padding: 12px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn:hover {
+            background-color: var(--white);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .section {
+            padding: 80px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .section-title h2 {
+            font-size: 2rem;
+            color: var(--primary-color);
+            position: relative;
+            display: inline-block;
+            padding-bottom: 15px;
+        }
+        
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            width: 50px;
+            height: 3px;
+            background-color: var(--accent-color);
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .about-content {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+        }
+        
+        .about-text {
+            flex: 1;
+        }
+        
+        .about-text h3 {
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+        
+        .about-image {
+            flex: 1;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        .about-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.5s;
+        }
+        
+        .about-image:hover img {
+            transform: scale(1.05);
+        }
+        
+        .mission-vision {
+            background-color: var(--white);
+        }
+        
+        .mv-container {
+            display: flex;
+            gap: 30px;
+        }
+        
+        .mv-box {
+            flex: 1;
+            background-color: var(--light-color);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            text-align: center;
+            transition: transform 0.3s;
+        }
+        
+        .mv-box:hover {
+            transform: translateY(-10px);
+        }
+        
+        .mv-box i {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+        
+        .mv-box h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--primary-color);
+        }
+        
+        .activities {
+            background-color: var(--light-color);
+        }
+        
+        .activities-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .activity-card {
+            background-color: var(--white);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s;
+        }
+        
+        .activity-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .activity-img {
+            height: 200px;
+            overflow: hidden;
+        }
+        
+        .activity-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .activity-card:hover .activity-img img {
+            transform: scale(1.1);
+        }
+        
+        .activity-content {
+            padding: 20px;
+        }
+        
+        .activity-content h3 {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            color: var(--primary-color);
+        }
+        
+        .donate-section {
+            background: linear-gradient(rgba(42, 127, 98, 0.9), rgba(42, 127, 98, 0.9)), url('data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBxMSEhUSEhIVFRUXFxUXFxcXFxcVFxcXFxUXFxcVFRUYHSggGBolHRUVITEhJSkrLi4uFx8zODMtNygtLisBCgoKBQUFDgUFDisZExkrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrK//AABEIALcBEwMBIgACEQEDEQH/xAAYAAADAQEAAAAAAAAAAAAAAAAAAQIDB//EAB8QAQEBAQEBAAMAAwAAAAAAAAABEQISIUFRYTFx8P/EABQBAQAAAAAAAAAAAAAAAAAAAAD/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwDjwJVAcng08AsLFFKBeU8xdAJsGLwsBFifLTyLyCCjScjwCQ08l5BEUqQ/IM7CkadQvIIw5F4UBFgOwqBaeGIBgQ6CLArRQTh4IIAAhUBZ/sj0AD1EpwFU4mq5oKFhyjASfMBgpP8ATh8gWFi/J5QRn4V5VDBFg5ORcBPkvK6cgM/A8NLE2Aicl5aQrAZ4MaWDAZ+T8r8iwEeU3lpgwGN5K8tSuAxkUdwsAtB+QBYBv8AIhwRcgJV5PDwBIqQRcgJkFXDwESHIrCBWCQRU+giLkHPKsAsHMVgwCsKRSsBnSsXn8PAZ4PLTykE4nyvDkBnYGlTcBnSq7E2AjE9NE0GXg7F4nAKQuqLE3kDlAwAnlpEYqAqHCO0FYuRnzWk6A5FVKoAwZ+1YIBTmNPJcrkAoMXIAKQRUGAmQYoqBCngwE1ONMLATIWLsIEWfU2LqaCaVUmgilT6AIvJYtNoIqbFkCPIVhgz0QStIA5PyJFYAnyteeUYvkDsKn6MFSHORzFSAJD5OiAenE6fPW0FSDqHp4BYWHDwEixWFQIrDwWAmxNi7C6BnYir6IE0pFWFATYnpdQCamqIEpxVIACAIi4nlcBUVIUVAPiKworQTYc5OqnQK45xf1Po+dA8EhyFAGL55Zrk/YLPBgoGBC0BRTICFgFoFUdVVTYCMHSs/RX6CLCqrStBFTVWpoJqarpIJ6JVSBaBpgnlfLOKBcVqIqUGsVjOdNJQLPqpAUoL5rTWfJzoFyjfwUOQDhjDA4pMUAOloAQCFQKlBaW/QBdC9p0D1naeEBWJo9JtA7U9UeU0E2loz6VAUi0gKmeAEyHhSqlA1EqArlUqI0gGep1UBQwlAvmKjLlpKCgnQCtVqINBpAznR+gUXVL0V6ABF7T6BoGen6A/TPqnaXQF+SvKT0BWVq+uk0EUs06nQRYOeVaKB4EegA5jSIh6DSGy9K0FcrnVTzVcgqU50kSgvR6T6EoLik6VBpKr0xlXKC5T1no0F6eplK0FWl6RegB2i9EUoH6LStK0B1RAWgCp1FoHUWn6Z90DoqZ0QHqeqaegTZf8AsDSUAnimiVUoKFpWnwC+aqVMgBXoWotPQXKfNZ6OaDbS56Ro0G3NHpn6HoGmnrKU50DT0es9OUFUam9F6A+qNTpXoFaLWd6LQa+om1Gi9AqhEo6oKxPSeeh10CLDqaQL/wAEk4BygsAH5GKME6cGFQXKXpI0DtEpAFSjUaWg10vSNFoLlPWUHoG+iVj6HoG3o/TH0fqgu9i9ItANOaXpGiUD9D2ztGgq9D2jT5gL0qP4ALRYY0EhQ8gnBg5VeQLQfkgUNAAek2AAX0aQAaJQAVqdAAuqRgBKVpgBIeAAcOEAOkQA4LQAAIAWGAB6NAASjQAOAAFcw5AAAAB//9k=');
+            background-size: cover;
+            background-position: center;
+            color: var(--white);
+            text-align: center;
+            padding: 80px 20px;
+        }
+        
+        .donate-section h2 {
+            font-size: 2.2rem;
+            margin-bottom: 20px;
+        }
+        
+        .donate-section p {
+            font-size: 1.1rem;
+            max-width: 700px;
+            margin: 0 auto 30px;
+        }
+        
+        .donate-btn {
+            background-color: var(--accent-color);
+            color: var(--dark-color);
+        }
+        
+        .donate-btn:hover {
+            background-color: var(--white);
+        }
+        
+        footer {
+            background-color: var(--dark-color);
+            color: var(--white);
+            padding: 60px 0 20px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-column h3 {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            color: var(--accent-color);
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            width: 40px;
+            height: 2px;
+            background-color: var(--primary-color);
+            bottom: 0;
+            left: 0;
+        }
+        
+        .footer-column p {
+            margin-bottom: 15px;
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-links a {
+            color: var(--white);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: var(--accent-color);
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            color: var(--white);
+            font-size: 1.2rem;
+            transition: all 0.3s;
+        }
+        
+        .social-links a:hover {
+            background-color: var(--accent-color);
+            color: var(--dark-color);
+            transform: translateY(-3px);
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            font-size: 0.9rem;
+        }
+        
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .about-content {
+                flex-direction: column;
+            }
+            
+            .mv-container {
+                flex-direction: column;
+            }
+            
+            .mv-box {
+                margin-bottom: 20px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            nav {
+                position: fixed;
+                top: 0;
+                left: -100%;
+                width: 80%;
+                height: 100vh;
+                background-color: var(--white);
+                box-shadow: 0 0 10px rgba(0,0,0,0.1);
+                transition: left 0.3s;
+                z-index: 1000;
+                padding: 80px 30px 30px;
+            }
+            
+            nav.active {
+                left: 0;
+            }
+            
+            nav ul {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            .close-menu-btn {
+                position: absolute;
+                top: 20px;
+                right: 20px;
+                font-size: 1.5rem;
+                background: none;
+                border: none;
+                cursor: pointer;
+            }
+            
+            .hero h2 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .contact-info {
+                flex-direction: column;
+                gap: 5px;
+            }
+            
+            .logo {
+                flex-direction: column;
+                text-align: center;
+                gap: 10px;
+            }
+            
+            .logo-text h1 {
+                font-size: 1.5rem;
+            }
+            
+            .section {
+                padding: 60px 0;
+            }
+            
+            .section-title h2 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <!-- Top Bar with Contact Info -->
+    <div class="top-bar">
+        <div class="container">
+            <div class="contact-info">
+                <span><i class="fas fa-phone-alt"></i> +1 (555) 123-4567</span>
+                <span><i class="fas fa-envelope"></i> info@Healthfoundationpromotion.org</span>
+            </div>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Header with Logo and Navigation -->
+    <header>
+        <div class="container header-content">
+            <div class="logo">
+                <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiBzMEiI1Oj_DIpQ9iPG_MZDhJR8T8UJyu1-ceivIraVusGgEcA51SZORdvgVFEOdJX3BWCAq7IqkhiO2Lfh3UOS1Ml2X6OijBtsmUQQqPsavi8VRe4q4Kd7MTc1veLrOdgxQYWBqK5x8dApcI2oJ9oJvjoAAt9hlBrEV4uBR_zFQFgvc4BWfcXBQy1Wg/s1600/8151125b-1931-4edf-92f9-125e19554c12__1_-removebg-preview.png" alt="HealthFirst Logo">
+                <div class="logo-text">
+                    <h1>Health Promotion Foundation</h1>
+                    <p>Foundation for a healthier world</p>
+                </div>
+            </div>
+            
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+            
+            <nav id="mainNav">
+                <button class="close-menu-btn" id="closeMenuBtn">
+                    <i class="fas fa-times"></i>
+                </button>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#mission">Mission & Vision</a></li>
+                    <li><a href="#activities">Activities</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                    <li><a href="#" class="btn">Donate</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <div>
+                <h2>Building a Healthier Future Together</h2>
+                <p>Join us in our mission to provide quality healthcare services to underserved communities worldwide.</p>
+                <a href="#" class="btn">Get Involved</a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- About Section -->
+    <section class="section" id="about">
+        <div class="container">
+            <div class="section-title">
+                <h2>About Us</h2>
+            </div>
+            <div class="about-content">
+                <div class="about-text">
+                    <h3>Who We Are</h3>
+                    <p>HealthFirst Foundation is a non-profit organization dedicated to improving global health outcomes through innovative programs, community engagement, and partnerships with healthcare providers.</p>
+                    <p>Founded in 2005, we have impacted over 2 million lives across 30 countries by providing access to essential healthcare services, health education, and disease prevention programs.</p>
+                    <p>Our team of healthcare professionals, volunteers, and partners work tirelessly to bridge the gap in healthcare accessibility and quality for vulnerable populations.</p>
+                </div>
+                <div class="about-image">
+                    <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjmXGkohO3Hef9-3meliRX8vg4qdYIKGUG3JSm-cXD1CXEIt8rE1zDfrmnfMMAC1Scd8_o8mcsm93mdtKrrET5suZY6DaeQf3JGCslcoBXW3jbozJnUBWwFt2011VthDnq5MK8DJHIM0sekI6lVDBGMaXWT7lLSLeVEFfCg0gbgb6K_gh2RJ81fGt7Ptw/s320/46f36b7e-ed37-4bdd-bec0-477271e4c947.jpg" alt="HealthFirst team helping community">
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Mission & Vision Section -->
+    <section class="section mission-vision" id="mission">
+        <div class="container">
+            <div class="section-title">
+                <h2>Our Mission & Vision</h2>
+            </div>
+            <div class="mv-container">
+                <div class="mv-box">
+                    <i class="fas fa-bullseye"></i>
+                    <h3>Our Mission</h3>
+                    <p>To improve health equity by providing accessible, affordable, and quality healthcare services to underserved communities while promoting health education and preventive care.</p>
+                </div>
+                <div class="mv-box">
+                    <i class="fas fa-eye"></i>
+                    <h3>Our Vision</h3>
+                    <p>A world where every individual, regardless of socioeconomic status or geographic location, has access to the healthcare they need to live a healthy and productive life.</p>
+                </div>
+                <div class="mv-box">
+                    <i class="fas fa-heart"></i>
+                    <h3>Our Values</h3>
+                    <p>Compassion, Integrity, Innovation, Collaboration, and Accountability guide everything we do at HealthFirst Foundation.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Activities Section -->
+    <section class="section activities" id="activities">
+        <div class="container">
+            <div class="section-title">
+                <h2>Our Activities</h2>
+            </div>
+            <div class="activities-grid">
+                <div class="activity-card">
+                    <div class="activity-img">
+                        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiRZBxvDqVU-IX0hG-js1ADhq2_HmxS5LM1wyUsE5ePZYuDXGQnzHICr0HoTHkN2EFHX0Cp9xxrRknhFwVmK5YEIl9CRCc7LoAv7K_RmYl7S7kgjAOYl7H6QT1ypfauGDxRMM1_Q3OOU5kRZaByhWnJpSb-XoIxM6GWFgjOPhvS6m8eXscASArsbDRtpw/s320/5c79ed71-13a9-4200-b77f-d2a7d41478c3.jpg" alt="Medical Camp">
+                    </div>
+                    <div class="activity-content">
+                        <h3>Mobile Medical Camps</h3>
+                        <p>We organize mobile medical camps in remote areas to provide free consultations, basic treatments, and health screenings to communities with limited access to healthcare facilities.</p>
+                    </div>
+                </div>
+                <div class="activity-card">
+                    <div class="activity-img">
+                        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgyvpaWy4IRUX3L70XjknYRxy_ty9qRlps-JQ4ob_HXTfVJZ3DATWg5AMJnxVCGZHyGSRQyXnpdqnRx9MFn1f3W7SX11wozpR-tccpjVSvQBWyUZ32kbQ7kBwnfNU7KYCsfpBAIy3xRuzh0JH6XGp2HQhyfyD-C9Xq9MyKY0lEXf_xUaf0Cx81if2V9_A/s320/e9d9e4b0-1521-453a-af3f-db5b799e7f74.jpg" alt="Health Education">
+                    </div>
+                    <div class="activity-content">
+                        <h3>Health Education Programs</h3>
+                        <p>Our community health workers conduct workshops on nutrition, hygiene, disease prevention, and maternal health to empower individuals with knowledge for better health outcomes.</p>
+                    </div>
+                </div>
+                <div class="activity-card">
+                    <div class="activity-img">
+                        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEirw_ADRd2NNwgDfR2qRgLdPk2kOI2lrfpNU4XSxoUuueTRhcvqwvsmVoqp-djjWohR43aSxroZKsKraOCuKp4DgRnUF6S7hkghwhpM5fxR52rsNa0p5RuZxJTyCt9fkTnEamQuOmgPaPfb6kb22Jh8n-Woo0ZuD095Dy2lRRaMOjOuWId4CA47CtzPAw/s320/2e13cf27-2d56-4033-97b4-8380d14d3fd0.jpg" alt="Vaccination Drive">
+                    </div>
+                    <div class="activity-content">
+                        <h3>Vaccination Drives</h3>
+                        <p>We partner with local health authorities to organize vaccination campaigns against preventable diseases, especially targeting children in low-income communities.</p>
+                    </div>
+                </div>
+                <div class="activity-card">
+                    <div class="activity-img">
+                        <img src="https://images.unsplash.com/photo-1530026186672-2cd00ffc50fe?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Clean Water Project">
+                    </div>
+                    <div class="activity-content">
+                        <h3>Clean Water Initiatives</h3>
+                        <p>Our clean water projects install filtration systems and wells in communities lacking access to safe drinking water, significantly reducing waterborne diseases.</p>
+                    </div>
+                </div>
+                <div class="activity-card">
+                    <div class="activity-img">
+                        <img src="https://cdn.who.int/media/images/default-source/mca/1-maternal-health/mah-infographics/mah-7-steps-action-plan-to-strengthen-quality-midwifery-education.png?sfvrsn=6732b1ae_4" alt="Maternal Health">
+                    </div>
+                    <div class="activity-content">
+                        <h3>Maternal Health Services</h3>
+                        <p>We provide prenatal and postnatal care, safe delivery assistance, and maternal health education to reduce maternal and infant mortality rates in underserved areas.</p>
+                    </div>
+                </div>
+                <div class="activity-card">
+                    <div class="activity-img">
+                        <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Disaster Relief">
+                    </div>
+                    <div class="activity-content">
+                        <h3>Disaster Relief</h3>
+                        <p>Our emergency response teams provide medical aid, supplies, and support to communities affected by natural disasters or health crises.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Donate Section -->
+    <section class="donate-section">
+        <div class="container">
+            <h2>Your Support Makes a Difference</h2>
+            <p>Every donation helps us reach more people with life-changing healthcare services. Join us in creating a healthier world for all.</p>
+            <a href="#" class="btn donate-btn">Donate Now</a>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <div class="logo">
+                        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiBzMEiI1Oj_DIpQ9iPG_MZDhJR8T8UJyu1-ceivIraVusGgEcA51SZORdvgVFEOdJX3BWCAq7IqkhiO2Lfh3UOS1Ml2X6OijBtsmUQQqPsavi8VRe4q4Kd7MTc1veLrOdgxQYWBqK5x8dApcI2oJ9oJvjoAAt9hlBrEV4uBR_zFQFgvc4BWfcXBQy1Wg/s1600/8151125b-1931-4edf-92f9-125e19554c12__1_-removebg-preview.png" alt="HealthFirst Logo">
+                        <div class="logo-text">
+                            <h3>Health Promotion Foundation</h3>
+                            <p>Foundation for a healthier world</p>
+                        </div>
+                    </div>
+                    <p>We are committed to improving health outcomes for vulnerable populations through innovative programs and community partnerships.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#mission">Mission & Vision</a></li>
+                        <li><a href="#activities">Our Activities</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                        <li><a href="#">Donate</a></li>
+                        <li><a href="#">Volunteer</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Our Activities</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Medical Camps</a></li>
+                        <li><a href="#">Health Education</a></li>
+                        <li><a href="#">Vaccination Drives</a></li>
+                        <li><a href="#">Clean Water Projects</a></li>
+                        <li><a href="#">Maternal Health</a></li>
+                        <li><a href="#">Disaster Relief</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contact Us</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> Bharatpur-10, chitwan </p>
+                    <p><i class="fas fa-phone-alt"></i> +1 (555) 123-4567</p>
+                    <p><i class="fas fa-envelope"></i> info@HealthPromotionfoundation.org</p>
+                    <p><i class="fas fa-clock"></i> Mon-Fri: 9:00 AM - 5:00 PM</p>
+                    <h3 style="margin-top: 20px;">Newsletter</h3>
+                    <p>Subscribe to our newsletter for updates on our work and how you can help.</p>
+                    <form>
+                        <input type="email" placeholder="Your Email" style="padding: 10px; width: 100%; margin-bottom: 10px; border-radius: 5px; border: none;">
+                        <button type="submit" class="btn" style="width: 100%; padding: 10px;">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 Health Promotion Foundation. All Rights Reserved. | <a href="#" style="color: var(--accent-color);">Privacy Policy</a> | <a href="#" style="color: var(--accent-color);">Terms of Service</a></p>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- JavaScript -->
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const closeMenuBtn = document.getElementById('closeMenuBtn');
+        const mainNav = document.getElementById('mainNav');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            mainNav.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+        
+        closeMenuBtn.addEventListener('click', () => {
+            mainNav.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        });
+        
+        // Close menu when clicking on a link
+        const navLinks = document.querySelectorAll('nav a');
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mainNav.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            });
+        });
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 100,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Sticky header on scroll
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            header.classList.toggle('sticky', window.scrollY > 0);
+        });
+    </script>
+</body>
+</html>
