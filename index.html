@@ -27,6 +27,7 @@
             line-height: 1.6;
             color: var(--text-color);
             background-color: var(--light-color);
+            overflow-x: hidden; /* Prevent horizontal scroll */
         }
         
         .top-bar {
@@ -74,6 +75,7 @@
         .logo img {
             height: 60px;
             width: auto;
+            max-width: 100%;
         }
         
         .logo-text h1 {
@@ -129,6 +131,7 @@
             font-size: 1.5rem;
             cursor: pointer;
             color: var(--dark-color);
+            z-index: 1001;
         }
         
         .hero {
@@ -162,6 +165,7 @@
             transition: all 0.3s;
             border: none;
             cursor: pointer;
+            min-width: 120px; /* Ensure buttons are large enough for touch */
         }
         
         .btn:hover {
@@ -171,12 +175,12 @@
         }
         
         .section {
-            padding: 80px 0;
+            padding: 60px 0;
         }
         
         .section-title {
             text-align: center;
-            margin-bottom: 50px;
+            margin-bottom: 40px;
         }
         
         .section-title h2 {
@@ -429,7 +433,36 @@
             font-size: 0.9rem;
         }
         
+        /* Mobile Menu Overlay */
+        .mobile-menu-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            z-index: 999;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .mobile-menu-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
         /* Responsive Styles */
+        @media (max-width: 1200px) {
+            .hero h2 {
+                font-size: 2.2rem;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+        }
+        
         @media (max-width: 992px) {
             .about-content {
                 flex-direction: column;
@@ -442,24 +475,36 @@
             .mv-box {
                 margin-bottom: 20px;
             }
+            
+            .hero {
+                padding: 80px 20px;
+            }
+            
+            .hero h2 {
+                font-size: 2rem;
+            }
         }
         
         @media (max-width: 768px) {
+            /* Show mobile menu button */
             .mobile-menu-btn {
                 display: block;
             }
             
+            /* Hide desktop navigation */
             nav {
                 position: fixed;
                 top: 0;
                 left: -100%;
                 width: 80%;
+                max-width: 300px;
                 height: 100vh;
                 background-color: var(--white);
-                box-shadow: 0 0 10px rgba(0,0,0,0.1);
-                transition: left 0.3s;
+                box-shadow: 0 0 20px rgba(0,0,0,0.2);
+                transition: left 0.3s ease;
                 z-index: 1000;
                 padding: 80px 30px 30px;
+                overflow-y: auto;
             }
             
             nav.active {
@@ -471,6 +516,12 @@
                 gap: 20px;
             }
             
+            nav a {
+                font-size: 1.1rem;
+                padding: 8px 0;
+                display: block;
+            }
+            
             .close-menu-btn {
                 position: absolute;
                 top: 20px;
@@ -479,21 +530,53 @@
                 background: none;
                 border: none;
                 cursor: pointer;
+                color: var(--dark-color);
             }
             
             .hero h2 {
-                font-size: 2rem;
+                font-size: 1.8rem;
             }
             
             .hero p {
                 font-size: 1rem;
             }
+            
+            .section {
+                padding: 50px 0;
+            }
+            
+            .section-title h2 {
+                font-size: 1.8rem;
+            }
+            
+            .btn {
+                padding: 10px 25px;
+                font-size: 0.9rem;
+            }
+            
+            /* Make sure touch targets are at least 48px */
+            a, button {
+                min-height: 48px;
+                min-width: 48px;
+            }
         }
         
         @media (max-width: 576px) {
+            .top-bar {
+                font-size: 0.8rem;
+                padding: 8px 0;
+            }
+            
             .contact-info {
                 flex-direction: column;
                 gap: 5px;
+                width: 100%;
+                text-align: center;
+            }
+            
+            .social-links {
+                justify-content: center;
+                width: 100%;
             }
             
             .logo {
@@ -506,12 +589,73 @@
                 font-size: 1.5rem;
             }
             
+            .logo img {
+                height: 50px;
+            }
+            
+            .hero {
+                padding: 60px 20px;
+            }
+            
+            .hero h2 {
+                font-size: 1.6rem;
+            }
+            
             .section {
-                padding: 60px 0;
+                padding: 40px 0;
             }
             
             .section-title h2 {
-                font-size: 1.8rem;
+                font-size: 1.6rem;
+            }
+            
+            .mv-box {
+                padding: 20px;
+            }
+            
+            .mv-box i {
+                font-size: 2rem;
+            }
+            
+            .mv-box h3 {
+                font-size: 1.3rem;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+            
+            .footer-column {
+                text-align: center;
+            }
+            
+            .footer-column h3::after {
+                left: 50%;
+                transform: translateX(-50%);
+            }
+            
+            .social-links {
+                justify-content: center;
+            }
+        }
+        
+        @media (max-width: 400px) {
+            .hero h2 {
+                font-size: 1.4rem;
+            }
+            
+            .hero p {
+                font-size: 0.9rem;
+            }
+            
+            .btn {
+                padding: 8px 20px;
+                font-size: 0.8rem;
+            }
+            
+            .activities-grid {
+                grid-template-columns: 1fr;
             }
         }
     </style>
@@ -546,12 +690,14 @@
                 </div>
             </div>
             
-            <button class="mobile-menu-btn" id="mobileMenuBtn">
+            <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Open menu">
                 <i class="fas fa-bars"></i>
             </button>
             
+            <div class="mobile-menu-overlay" id="mobileMenuOverlay"></div>
+            
             <nav id="mainNav">
-                <button class="close-menu-btn" id="closeMenuBtn">
+                <button class="close-menu-btn" id="closeMenuBtn" aria-label="Close menu">
                     <i class="fas fa-times"></i>
                 </button>
                 <ul>
@@ -767,23 +913,25 @@
         const mobileMenuBtn = document.getElementById('mobileMenuBtn');
         const closeMenuBtn = document.getElementById('closeMenuBtn');
         const mainNav = document.getElementById('mainNav');
+        const mobileMenuOverlay = document.getElementById('mobileMenuOverlay');
         
-        mobileMenuBtn.addEventListener('click', () => {
-            mainNav.classList.add('active');
-            document.body.style.overflow = 'hidden';
-        });
+        function toggleMenu() {
+            mainNav.classList.toggle('active');
+            mobileMenuOverlay.classList.toggle('active');
+            document.body.style.overflow = mainNav.classList.contains('active') ? 'hidden' : 'auto';
+        }
         
-        closeMenuBtn.addEventListener('click', () => {
-            mainNav.classList.remove('active');
-            document.body.style.overflow = 'auto';
-        });
+        mobileMenuBtn.addEventListener('click', toggleMenu);
+        closeMenuBtn.addEventListener('click', toggleMenu);
+        mobileMenuOverlay.addEventListener('click', toggleMenu);
         
         // Close menu when clicking on a link
         const navLinks = document.querySelectorAll('nav a');
         navLinks.forEach(link => {
             link.addEventListener('click', () => {
-                mainNav.classList.remove('active');
-                document.body.style.overflow = 'auto';
+                if (mainNav.classList.contains('active')) {
+                    toggleMenu();
+                }
             });
         });
         
@@ -809,6 +957,12 @@
         window.addEventListener('scroll', () => {
             const header = document.querySelector('header');
             header.classList.toggle('sticky', window.scrollY > 0);
+        });
+        
+        // Make sure all images are responsive
+        document.querySelectorAll('img').forEach(img => {
+            img.style.maxWidth = '100%';
+            img.style.height = 'auto';
         });
     </script>
 </body>
